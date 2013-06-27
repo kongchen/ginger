@@ -85,7 +85,7 @@ For more details and usages of the `Sequence File`, please see the [wiki](https:
 `Ginger` is an executable all-in-one jar package `ginger-0.1-jar-with-dependencies.jar`, there're 2 ways to get it:
 
 1. Download the source and launch `mvn package`
-2. Download the binary directly from [Bintay](http://dl.bintray.com/kongchen/generic/ginger-0.1-jar-with-dependencies.jar?direct)
+2. Download the binary directly from [Bintray](http://dl.bintray.com/kongchen/generic/ginger-0.1-jar-with-dependencies.jar?direct)
 
 Assume you've done the above steps:
 
