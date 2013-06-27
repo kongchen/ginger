@@ -6,7 +6,7 @@
 
     <groupId>com.github.kongchen</groupId>
     <artifactId>ginger</artifactId>
-    <version>0.1-SNAPSHOT</version>
+    <version>0.1</version>
     <dependencies>
         <dependency>
             <groupId>org.apache.httpcomponents</groupId>
