@@ -1,51 +1,39 @@
-# Swagger your API Document with **<font color="green">Examples</font>**
+# ginger
 
-Swagger lets you write your API document near your source code to keep it up-to-date, and provides a pretty ui (swagger-ui) to display the document. The document shows the url, parameters, error codes and descriptions for each of your APIs, and you can even ```try it out!```
+> Enrich your  **API document with samples**, to describe your API more precise, vivid and easy to be understood. 
 
-![](https://helloreverb.com/img/swagger-hero.png)
 
-It's good enough for most cases.
 
-However, if you wanna to put examples in your document to describe your API more precise, vivid and clear, it seems impossible for swagger.
-
-# This tool makes this **<font color="darkgray">impossible</font>** **possible!**
 
 ## Tutorials
 
 #### I. Swagger your document
-The precondition for using this tool is that you have followed [Swagger's Tutorials](https://github.com/wordnik/swagger-core/wiki/java-jax-rs) and made your service worked happily with Swagger - Pass the [Test](https://github.com/wordnik/swagger-core/wiki/java-jax-rs#testing) in the tutorial.
+The precondition for using ginger is that you have followed [Swagger's Tutorials](https://github.com/wordnik/swagger-core/wiki/java-jax-rs) and made your service works happily with Swagger -- At least pass the [Test](https://github.com/wordnik/swagger-core/wiki/java-jax-rs#testing) in the tutorial.
 
-Thus, you can hit the swagger resource declaration url:
+Thus, start your service and you can hit the swagger resource declaration url:
 ```
 http://www.example.com:8080/your/api/path/api-docs.json
 ```
-We will name this URL as ```swaggerBaseURL```
+This is your ```swaggerBaseURL```, keep it in mind.
 
-#### II. Start your service
-Obviously, it's a must otherwise you even cannot get Swagger documents.
 
-The purpose of emphasize this is to introduce another url ```sampleBaseURL``` which your samples runs against:
-```
-http://www.example.com:8080/your/api/path
-```
+#### II. Prepare your Sample Package
 
-#### III. Prepare your Sample Package
-
-```Sample Package``` is a directory in which there're **several** ```Request file```s and **one** ```Sequence File```. For example:
-> It's a sample package with 3 request file and 1 sequence file.
+A **sample package** is a directory in which there're **several** ```Request File```s and **one** ```Sequence File```. For example:
+> The sample package `/foo/samples/` has 3 request file and 1 sequence file.
 ```bash
-root@/samplepackage/> ls
+root@/foo/samples/> ls
 gettoken.req    post.req    postGroup.req    sample.seq
 ```
 
 
 
 ##### 1. Request File
-```Request File``` is a UTF-8 encoded text file which describes your HTTP request intuitively, one request one file and its name is arbitrary.
+```Request File``` is a UTF-8 encoded text file which describes your HTTP request intuitively, one request file should only represent one request.
 
 Here's an example:
 
-> A **```POST```** Request File with ```Accept``` and ```Content-Type``` headers, as well as a json body and calls to ```/shopping-cart```
+> A **POST** request with ```Accept``` and ```Content-Type``` headers, as well as a JSON body and goes to ```/shopping-cart```
 ```
 POST /shopping-cart
 > Accept: application/json
@@ -62,7 +50,7 @@ POST /shopping-cart
 ```
 
 ****
-For more details and usages of the `Request File`, please refer to the [wiki]()
+For more details and usages of the `Request File`, please see the [wiki]()
 ****
 
 ##### 2. Sequence File
@@ -70,7 +58,7 @@ For more details and usages of the `Request File`, please refer to the [wiki]()
 ```Sequence File``` is a UTF-8 encoded text file with several lines, a line can be:
 
 1. an empty line,
-2. a comment line or
+2. a commented line or
 3. a command line. 
 
 The command line controls the flow of requests we descibed in ```Request File```s. It's name is a constant called ***sample.seq***
@@ -92,34 +80,39 @@ updateItem << PutItem.req $selectedItemA:ETag $selectedItemA.id 0
 deleteItem << DeleteItem.req $updateItem:ETag $updateItem.id
 
 ```
+****
+For more details and usages of the `Sequence File`, please see the [wiki]()
+****
 
-For more details and usages of the `Sequence File`, please refer to the [wiki]()
+#### III. Launch *ginger*
+Assume you've done the above steps:
 
-#### IV. Launch the tool
+1. Your `swaggerBaseURL` is `http://www.example.com:8080/api/api-docs.json` ,
+2. You've prepared your `Request File`s and `Sequence File` in a sample package located at `/foo/samples/`
 
-If you have done the first 3 stpes, you can prepare a json configuration file:
+Now, prepare a json configuration file for *ginger*:
 ```json
 {
-   "sampleBaseURL":"http://www.example.com:8080/your/api/path",
-   "swaggerBaseURL":"http://www.example.com:8080/your/api/path/api-docs.json",
-   "samplePackage":"samples",
-   "outputTemplatePath":"template/strapdown.html.mustache",
-   "outputPath":"target/doc.html"
+   "swaggerBaseURL":"http://www.example.com:8080/api/api-docs.json",
+   "samplePackage":"/foo/samples",
+   "outputTemplatePath":"https://raw.github.com/kongchen/api-doc-template/master/v1.1/markdown.mustache",
+   "outputPath":"doc.md",
+   "withFormatSuffix":"false"
 }
-```
-1. `sampleBaseURL` and `swaggerBaseURL` are introduced in the step **I** and **II**, **Note** that the _path_ in the `Request File` is based on the `sampleBaseURL`
-2. `samplePackage` is the path to your `Sample Package`;
-3. `outputTemplatePath` is the document output template file's path.
-4. `outputPath` is the final document's ouput path.
-
-With this configuration file, you can launch this tool:
-```
 
 ```
-to let the tool helps you:
+1. `outputTemplatePath` is the document output template's URI, see more in [api-doc-template](https://github.com/kongchen/api-doc-template)
+2. `outputPath` is the final document's ouput path.
+3. `withFormatSuffix` indicates if you wannt swagger's `.{format}` suffix in your document.
 
-- generate API document, 
-- run samples you described in the `samplePackage`, 
-- automatically populate the samples' results in the document according to the output template.
+Assume the configuration file is `/bar/test.json`, now you can launch *ginger*:
+```
+java -cp ginger-0.1-SNAPSHOT.jar /bar/test.json
+```
+to let *ginger* help you:
 
-Finally, check out the `outputPath` to see the final document when the launch finished successfully.
+- Generate API document, 
+- Run samples you described in the `samplePackage`, 
+- Automatically populate the samples' results in the document according to the output template.
+
+Finally, check out the `/bar/doc.md` to see the final document when the launch finished successfully.
