@@ -50,7 +50,7 @@ public class SequenceInterpreterTest {
     }
 
     @Test
-    public void pp() throws Exception, GingerException {
+    public void testSequence() throws Exception, GingerException {
         interpreter.interpret();
 
         RemoteDocumentSource docSource = new RemoteDocumentSource(
