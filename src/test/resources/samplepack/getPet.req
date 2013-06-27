@@ -1,0 +1,3 @@
+GET /api/pet.json/{{0}}?api_key=special-key
+> Host: example.com
+> Accept: application/json

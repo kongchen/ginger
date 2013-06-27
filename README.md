@@ -1,6 +1,6 @@
-# ginger
+# ginger [![Build Status](https://travis-ci.org/kongchen/ginger.png)](https://travis-ci.org/kongchen/ginger)
 
-> Enrich your  **API document with samples**, to describe your API more precise, vivid and easy to be understood. 
+> Enrich your generated **API document with samples**, to describe your API more precise, vivid and easy to be understood.
 
 
 
@@ -81,6 +81,7 @@ For more details and usages of the `Sequence File`, please see the [wiki](https:
 ****
 
 #### III. Launch *ginger*
+
 Assume you've done the above steps:
 
 1. Your `swaggerBaseURL` is `http://www.example.com:8080/api/api-docs.json` ,
@@ -90,6 +91,7 @@ Now, prepare a json configuration file for *ginger*:
 ```json
 {
    "swaggerBaseURL":"http://www.example.com:8080/api/api-docs.json",
+   "apiBasePath": "/api",
    "samplePackage":"/foo/samples",
    "outputTemplatePath":"https://raw.github.com/kongchen/api-doc-template/master/v1.1/markdown.mustache",
    "outputPath":"doc.md",
@@ -97,13 +99,15 @@ Now, prepare a json configuration file for *ginger*:
 }
 
 ```
-1. `outputTemplatePath` is the document output template's URI, see more in [api-doc-template](https://github.com/kongchen/api-doc-template)
-2. `outputPath` is the final document's ouput path.
-3. `withFormatSuffix` indicates if you wannt swagger's `.{format}` suffix in your document.
+1. `swaggerBaseURL` must be end with `api-docs.json`, as defined in Swagger.
+2. `outputTemplatePath` is the document output template's URI, see more in [api-doc-template](https://github.com/kongchen/api-doc-template)
+3. `apiBasePath` is the api's path based on the server's root endpoint. This configuration is *very important* for populating the samples in output document.
+4. `outputPath` is the final document's ouput path.
+5. `withFormatSuffix` indicates if you wannt swagger's `.{format}` suffix in your document.
 
 Assume the configuration file is `/bar/test.json`, now you can launch *ginger*:
 ```
-java -cp ginger-0.1-SNAPSHOT.jar /bar/test.json
+java -cp ginger-0.1-SNAPSHOT-jar-with-dependencies.jar /bar/test.json
 ```
 to let *ginger* help you:
 

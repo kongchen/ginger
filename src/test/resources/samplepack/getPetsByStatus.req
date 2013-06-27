@@ -1,0 +1,4 @@
+GET /api/pet.json/findByStatus?status={{0}}&api_key=special-key
+> Host: example.com
+> Accept: application/json
+> Content-Type: application/json

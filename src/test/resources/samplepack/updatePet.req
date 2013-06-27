@@ -1,0 +1,22 @@
+PUT /api/pet.json?api_key=special-key
+> Host: example.com
+> Accept: application/json
+> Content-Type: application/json
+{
+  "id": {{0}},
+  "category": {
+    "id": 1,
+    "name": "dog"
+  },
+  "name": "{{1}}",
+  "photoUrls": [
+    ""
+  ],
+  "tags": [
+    {
+      "id": 1,
+      "name": "test1"
+    }
+  ],
+  "status": "pending"
+}

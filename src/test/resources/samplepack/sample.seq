@@ -1,0 +1,12 @@
+// Get pending pets
+pets <200< getPetsByStatus.req pending
+pets >> pet1s.rsp
+
+// get one Pet
+apet << getPet.req $pets[0].id
+apet >> apet.txt
+
+// update a pet
+// this is a test
+done <200< updatePet.req $pets[1].id "the name"
+done >> done.txt
