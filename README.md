@@ -55,13 +55,9 @@ For more details and usages of the `Request File`, please see the [wiki](https:/
 
 ##### 2. Sequence File
 
-```Sequence File``` is a UTF-8 encoded text file with several lines, a line can be:
+```Sequence File``` is a UTF-8 encoded text file used to control the flow of requests we descibed in ```Request File```s. 
 
-1. an empty line,
-2. a commented line or
-3. a command line. 
-
-The command line controls the flow of requests we descibed in ```Request File```s. It's name is a constant called ***sample.seq***
+Its name is a constant called ***sample.seq***
 
 Here'e an example:
 ```java
