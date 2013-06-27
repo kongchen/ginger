@@ -1,4 +1,4 @@
-# ginger [![Build Status](https://travis-ci.org/kongchen/ginger.png)](https://travis-ci.org/kongchen/ginger)
+# Ginger [![Build Status](https://travis-ci.org/kongchen/ginger.png)](https://travis-ci.org/kongchen/ginger)
 
 > Enrich your generated **API document with samples**, to describe your API more precise, vivid and easy to be understood.
 
@@ -8,7 +8,7 @@
 ## Tutorials
 
 #### I. Swagger your document
-The precondition for using ginger is that you have followed [Swagger's Tutorials](https://github.com/wordnik/swagger-core/wiki/java-jax-rs) and made your service works happily with Swagger -- At least pass the [Test](https://github.com/wordnik/swagger-core/wiki/java-jax-rs#testing) in the tutorial.
+The precondition for using Ginger is that you have followed [Swagger's Tutorials](https://github.com/wordnik/swagger-core/wiki/java-jax-rs) and made your service works happily with Swagger -- At least pass the [Test](https://github.com/wordnik/swagger-core/wiki/java-jax-rs#testing) in the tutorial.
 
 Thus, start your service and you can hit the swagger resource declaration url:
 ```
@@ -80,14 +80,19 @@ deleteItem << DeleteItem.req $updateItem:ETag $updateItem.id
 For more details and usages of the `Sequence File`, please see the [wiki](https://github.com/kongchen/ginger/wiki/Sequence-File)
 ****
 
-#### III. Launch *ginger*
+#### III. Launch *Ginger*
+
+`Ginger` is an executable all-in-one jar package `ginger-0.1-jar-with-dependencies.jar`, there're 2 ways to get it:
+
+1. Download the source and launch `mvn package`
+2. Download the binary directly from [Bintay](http://dl.bintray.com/kongchen/generic/ginger-0.1-jar-with-dependencies.jar?direct)
 
 Assume you've done the above steps:
 
 1. Your `swaggerBaseURL` is `http://www.example.com:8080/api/api-docs.json` ,
 2. You've prepared your `Request File`s and `Sequence File` in a sample package located at `/foo/samples/`
 
-Now, prepare a json configuration file for *ginger*:
+Now, prepare a json configuration file for *Ginger*:
 ```json
 {
    "swaggerBaseURL":"http://www.example.com:8080/api/api-docs.json",
@@ -105,11 +110,11 @@ Now, prepare a json configuration file for *ginger*:
 4. `outputPath` is the final document's ouput path.
 5. `withFormatSuffix` indicates if you wannt swagger's `.{format}` suffix in your document.
 
-Assume the configuration file is `/bar/test.json`, now you can launch *ginger*:
+Assume the configuration file is `/bar/test.json`, now you can launch *Ginger*:
 ```
-java -cp ginger-0.1-SNAPSHOT-jar-with-dependencies.jar /bar/test.json
+java -cp ginger-SNAPSHOT-jar-with-dependencies.jar /bar/test.json
 ```
-to let *ginger* help you:
+to let *Ginger* help you:
 
 - Generate API document, 
 - Run samples you described in the `samplePackage`, 
