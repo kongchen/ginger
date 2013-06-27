@@ -50,7 +50,7 @@ POST /shopping-cart
 ```
 
 ****
-For more details and usages of the `Request File`, please see the [wiki]()
+For more details and usages of the `Request File`, please see the [wiki](https://github.com/kongchen/ginger/wiki/Request-File)
 ****
 
 ##### 2. Sequence File
@@ -81,7 +81,7 @@ deleteItem << DeleteItem.req $updateItem:ETag $updateItem.id
 
 ```
 ****
-For more details and usages of the `Sequence File`, please see the [wiki]()
+For more details and usages of the `Sequence File`, please see the [wiki](https://github.com/kongchen/ginger/wiki/Sequence-File)
 ****
 
 #### III. Launch *ginger*
