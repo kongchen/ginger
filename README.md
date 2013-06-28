@@ -111,7 +111,7 @@ Now, prepare a json configuration file for *Ginger*:
 5. `withFormatSuffix` indicates if you wannt swagger's `.{format}` suffix in your document.
 
 Assume the configuration file is `test.json`, now you can launch *Ginger*:
-```
+```bash
 java -jar ginger-0.1-jar-with-dependencies.jar test.json
 ```
 to let *Ginger* help you:
