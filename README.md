@@ -19,13 +19,8 @@ This is your ```swaggerBaseURL```, keep it in mind.
 
 #### II. Prepare your Sample Package
 
-A **sample package** is a directory in which there're **several** ```Request File```s and **one** ```Sequence File```. For example:
-> The sample package `/foo/samples/` has 3 request file and 1 sequence file.
-```bash
-root@/foo/samples/> ls
-gettoken.req    post.req    postGroup.req    sample.seq
-```
-
+A **sample package** is a directory in which there're **several** ```Request File```s and **one** ```Sequence File```. 
+There's a [sample package](https://github.com/kongchen/ginger/tree/master/src/test/resources/samplepack) in code base's test resources you can refer to.
 
 
 ##### 1. Request File
