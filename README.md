@@ -114,7 +114,7 @@ Assume the configuration file is `test.json`, now you can launch *Ginger*:
 ```bash
 java -jar ginger-0.1-jar-with-dependencies.jar test.json
 ```
-to let *Ginger* help you:
+to let Ginger:
 
 - Generate API document, 
 - Run samples you described in the `samplePackage`, 
