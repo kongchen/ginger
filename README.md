@@ -110,9 +110,9 @@ Now, prepare a json configuration file for *Ginger*:
 4. `outputPath` is the final document's ouput path.
 5. `withFormatSuffix` indicates if you wannt swagger's `.{format}` suffix in your document.
 
-Assume the configuration file is `/bar/test.json`, now you can launch *Ginger*:
+Assume the configuration file is `test.json`, now you can launch *Ginger*:
 ```
-java -cp ginger-SNAPSHOT-jar-with-dependencies.jar /bar/test.json
+java -jar ginger-0.1-jar-with-dependencies.jar test.json
 ```
 to let *Ginger* help you:
 
@@ -120,4 +120,4 @@ to let *Ginger* help you:
 - Run samples you described in the `samplePackage`, 
 - Automatically populate the samples' results in the document according to the output template.
 
-Finally, check out the `/bar/doc.md` to see the final document when the launch finished successfully.
+Finally, check out the `doc.md` to see the final document when the launch finished successfully.
