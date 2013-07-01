@@ -1,0 +1,8 @@
+{
+   "swaggerBaseURL":"http://www.example.com:8080/api/api-docs.json",
+   "apiBasePath": "/api",
+   "samplePackage":"/foo/samples",
+   "outputTemplatePath":"https://raw.github.com/kongchen/api-doc-template/master/v1.1/markdown.mustache",
+   "outputPath":"doc.md",
+   "withFormatSuffix":"false"
+}
