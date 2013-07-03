@@ -129,13 +129,18 @@ public class SequenceContext {
     private boolean isSamePath(String urlInSwaggerDoc, String pathInRequestFile) {
 
         String urlhostRegex = "^((http|https)://)?(\\w+\\.)*\\w+(:\\d+)?";
+        if (!urlInSwaggerDoc.contains(swaggerBaseURL)) {
+            System.out.println(String.format(
+                    "You should configure swaggerBaseURL[%s] match with server's swagger.api.basepath[%s]",
+                    swaggerBaseURL, urlInSwaggerDoc));
+        }
         String pathInSwaggerDoc = urlInSwaggerDoc.replaceAll(swaggerBaseURL, "");
         if (!pathInSwaggerDoc.startsWith("/")) {
             pathInSwaggerDoc = "/" + pathInSwaggerDoc;
         }
 
         if (withFormatSuffix) {
-            String regex = pathInSwaggerDoc.replaceAll(".\\{format}", "(\\\\.json|\\\\.xml)").replaceAll("\\{\\w+}",
+            String regex = pathInSwaggerDoc.replaceAll(".\\{format}", "(\\\\.json|\\\\.xml)").replaceAll(".+",
                     ".+");
             return pathInRequestFile.matches(regex);
         } else {

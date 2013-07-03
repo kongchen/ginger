@@ -99,7 +99,7 @@ Now, prepare a json configuration file for *Ginger*:
 }
 
 ```
-1. `swaggerBaseURL` must be end with `api-docs.json`, as defined in Swagger.
+1. `swaggerBaseURL` must be end with `api-docs.json`, as defined in Swagger. In another word, it should be configured as `swagger.api.basepath` in
 2. `outputTemplatePath` is the document output template's URI, see more in [api-doc-template](https://github.com/kongchen/api-doc-template)
 3. `apiBasePath` is the api's path based on the server's root endpoint. This configuration is *very important* for populating the samples in output document.
 4. `outputPath` is the final document's ouput path.
