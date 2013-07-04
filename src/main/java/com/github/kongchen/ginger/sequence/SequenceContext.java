@@ -57,8 +57,10 @@ public class SequenceContext {
         } catch (URISyntaxException e) {
             //ignore
         }
-        this.sampleFile = new File(input.getSamplePackage(), GingerConstants.SEQUENCEFILE);
-        this.baseDir = input.getSamplePackage();
+        if (input.getSamplePackage() != null) {
+            this.sampleFile = new File(input.getSamplePackage(), GingerConstants.SEQUENCEFILE);
+            this.baseDir = input.getSamplePackage();
+        }
         this.baseUrl = sampleURI;
         this.withFormatSuffix = input.isWithFormatSuffix();
     }
@@ -128,7 +130,6 @@ public class SequenceContext {
 
     private boolean isSamePath(String urlInSwaggerDoc, String pathInRequestFile) {
 
-        String urlhostRegex = "^((http|https)://)?(\\w+\\.)*\\w+(:\\d+)?";
         if (!urlInSwaggerDoc.contains(swaggerBaseURL)) {
             System.out.println(String.format(
                     "You should configure swaggerBaseURL[%s] match with server's swagger.api.basepath[%s]",

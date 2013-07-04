@@ -50,38 +50,44 @@ public class SequenceInterpreter {
         InputConfiguration input = null;
         try {
             input = objectMapper.readValue(new File(args[0]), InputConfiguration.class);
+            if (input.getApiBasePath() == null || input.getOutputPath() == null || input.getOutputTemplatePath() == null
+                    || input.getSwaggerBaseURL() == null) {
+                throw new IOException("");
+            }
         } catch (IOException e) {
             System.err.println("Bad format of configuration file!");
             printUsage();
             return;
         }
-
-        SequenceContext context = new SequenceContext(input);
-        SequenceInterpreter interpreter = new SequenceInterpreter(context);
-        interpreter.interpret();
-
         BasicConfigurator.configure();
-
-        String swaggerOutput = null;
-
         RemoteDocumentSource docSource = new RemoteDocumentSource(
                 new LogAdapter(LOG), input.getSwaggerBaseURL(),
-                input.getOutputTemplatePath().toString(), input.getOutputPath().getPath(), swaggerOutput);
+                input.getOutputTemplatePath().toString(), input.getOutputPath().getPath(), null);
         docSource.withFormatSuffix(input.isWithFormatSuffix());
         docSource.loadDocuments();
 
-        OutputTemplate outputTemplate = docSource.prepareMustacheTemplate();
-        Set<String> usedSamples = new HashSet<String>();
-        for (MustacheDocument doc : outputTemplate.getApiDocuments()) {
-            usedSamples.addAll(context.populateSamplesToDoc(doc));
-        }
-        LOG.info(usedSamples.size() + "/" + context.getSamples().size() + " samples are populated in document.");
-        for (String s : context.getSamples()) {
-            if (!usedSamples.contains(s)) {
-                LOG.info("Sample [" + s + "] is not used.");
-            }
-        }
 
+
+        if (input.getSamplePackage() != null) {
+            OutputTemplate outputTemplate = docSource.prepareMustacheTemplate();
+            SequenceContext context = new SequenceContext(input);
+            SequenceInterpreter interpreter = new SequenceInterpreter(context);
+            interpreter.interpret();
+
+
+
+            Set<String> usedSamples = new HashSet<String>();
+            for (MustacheDocument doc : outputTemplate.getApiDocuments()) {
+                usedSamples.addAll(context.populateSamplesToDoc(doc));
+            }
+            LOG.info(usedSamples.size() + "/" + context.getSamples().size() + " samples are populated in document.");
+            for (String s : context.getSamples()) {
+                if (!usedSamples.contains(s)) {
+                    LOG.info("Sample [" + s + "] is not used.");
+                }
+            }
+
+        }
         docSource.toDocuments();
         docSource.toSwaggerDocuments();
     }
@@ -95,7 +101,8 @@ public class SequenceInterpreter {
                 "   \"samplePackage\":\"samples\",\n" +
                 "   \"outputTemplatePath\":\"template/strapdown.html.mustache\",\n" +
                 "   \"outputPath\":\"target/doc.html\"\n" +
-                "}");
+                "}\n\n" +
+                "samplePackage can omit.");
     }
 }
 
