@@ -101,9 +101,12 @@ Now, prepare a json configuration file for *Ginger*:
 ```
 1. `swaggerBaseURL` must be end with `api-docs.json`, as defined in Swagger. In another word, it should be configured as `swagger.api.basepath` in
 2. `outputTemplatePath` is the document output template's URI, see more in [api-doc-template](https://github.com/kongchen/api-doc-template)
-3. `apiBasePath` is the api's path based on the server's root endpoint. This configuration is *very important* for populating the samples in output document.
+3. `apiBasePath` is the api's path based on the server's root endpoint. This configuration is ***very important*** for populating the samples in output document.
 4. `outputPath` is the final document's ouput path.
 5. `withFormatSuffix` indicates if you wannt swagger's `.{format}` suffix in your document.
+6. `samplePackage` is the directory you prepared.
+> Note that this item can omit and if so, no samples would be generated and added in to your document.
+In another word, you'll get a same document just like you run [Swagger-Maven-Plugin](https://github.com/kongchen/swagger-maven-plugin) locally.
 
 Assume the configuration file is `test.json`, now you can launch *Ginger*:
 ```bash
